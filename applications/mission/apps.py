@@ -1,0 +1,7 @@
+from django.apps import AppConfig
+
+
+class MissionConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'applications.mission'
+    verbose_name = "Миссия и Ценности"
