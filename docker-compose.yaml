@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/main:/etc/nginx/conf.d
+      - ./nginx/main/jk_group_nginx.conf:/etc/nginx/jk_group_nginx.conf
+      - /etc/ssl:/etc/ssl
+    ports:
+      - "443:443"
+      - "80:80"
+    restart: always
+    depends_on:
+      - web
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: gunicorn source.wsgi:application --bind 0.0.0.0:8000 --log-level=info
+    volumes:
+      - .:/code
+    expose:
+      - "8000"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - wnu
+
+networks:
+  wnu:
+    driver: bridge
