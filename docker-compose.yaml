@@ -30,19 +30,19 @@ services:
     networks:
       - jkgroup
 
-  postgres:
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - ./postgres/data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    restart: always
-    networks:
-      - jkgroup
+  # postgres:
+  #   image: postgres:latest
+  #   environment:
+  #     POSTGRES_DB: ${POSTGRES_DB}
+  #     POSTGRES_USER: ${POSTGRES_USER}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  #   volumes:
+  #     - ./postgres/data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: always
+  #   networks:
+  #     - jkgroup
 
 networks:
   jkgroup:
