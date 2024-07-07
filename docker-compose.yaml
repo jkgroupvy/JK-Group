@@ -13,6 +13,8 @@ services:
     restart: always
     depends_on:
       - web
+    networks:
+      - jkgroup
 
   web:
     build:
@@ -25,6 +27,8 @@ services:
       - "8000"
     depends_on:
       - postgres
+    networks:
+      - jkgroup
 
   postgres:
     image: postgres:latest
@@ -38,8 +42,8 @@ services:
       - "5432:5432"
     restart: always
     networks:
-      - wnu
+      - jkgroup
 
 networks:
-  wnu:
+  jkgroup:
     driver: bridge
