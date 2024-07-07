@@ -7,6 +7,7 @@ services:
       - ./nginx/main:/etc/nginx/conf.d
       - ./nginx/main/jk_group_nginx.conf:/etc/nginx/jk_group_nginx.conf
       - /etc/ssl:/etc/ssl
+      - ./staticfiles:/code/staticfiles
     ports:
       - "443:443"
       - "80:80"
